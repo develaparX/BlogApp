@@ -1,13 +1,18 @@
 import express from "express";
+import connectDB from "./lib/connectDB.js";
+
 import userRouter from "./routes/user.route.js";
 import postRouter from "./routes/posts.route.js";
 import commentRouter from "./routes/comments.route.js";
 import webHookRouter from "./routes/webhook.route.js";
+
 import { clerkMiddleware, requireAuth } from "@clerk/express";
 
-import connectDB from "./lib/connectDB.js";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors(process.env.CLIENT_URL));
 app.use(clerkMiddleware());
 app.use("/webhooks", webHookRouter);
 
