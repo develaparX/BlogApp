@@ -13,6 +13,8 @@ const fetchComments = async (postId) => {
 
 const Comments = ({ postId }) => {
   const { user } = useUser();
+
+  console.log({ user });
   const { getToken } = useAuth();
 
   const { isPending, error, data } = useQuery({
