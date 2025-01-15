@@ -17,13 +17,13 @@ const WritePage = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    img && setValue((prev) => prev + `<p><image src=${img.url} /></p>`);
+    img && setValue((prev) => prev + `<p><image src="${img.url}" /></p>`);
   }, [img]);
 
   useEffect(() => {
     video &&
       setValue(
-        (prev) => prev + `<p><iframe class="ql-video" src=${video.url} /></p>`
+        (prev) => prev + `<p><iframe class="ql-video" src="${video.url}" /></p>`
       );
   }, [video]);
 
@@ -59,6 +59,7 @@ const WritePage = () => {
     const formData = new FormData(e.target);
 
     const data = {
+      img: cover.filePath || "",
       title: formData.get("title"),
       category: formData.get("category"),
       desc: formData.get("desc"),
