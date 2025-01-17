@@ -13,8 +13,6 @@ const fetchComments = async (postId) => {
 
 const Comments = ({ postId }) => {
   const { user } = useUser();
-
-  console.log({ user });
   const { getToken } = useAuth();
 
   const { isPending, error, data } = useQuery({
@@ -95,7 +93,7 @@ const Comments = ({ postId }) => {
           )}
 
           {data.map((comment) => (
-            <Comment key={comment._id} comment={comment} />
+            <Comment key={comment._id} comment={comment} postId={postId} />
           ))}
         </>
       )}
