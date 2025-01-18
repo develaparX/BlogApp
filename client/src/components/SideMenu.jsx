@@ -14,7 +14,7 @@ const SideMenu = () => {
   };
 
   const handleCategoryChange = (category) => {
-    if (searchParams.get("sort") !== category) {
+    if (searchParams.get("cat") !== category) {
       setSearchParams({
         ...Object.fromEntries(searchParams.entries()),
         cat: category,
@@ -99,7 +99,7 @@ const SideMenu = () => {
           className="underline cursor-pointer"
           onClick={() => handleCategoryChange("seo")}
         >
-          Searh Engine
+          Search Engines
         </span>
         <span
           className="underline cursor-pointer"
