@@ -6,6 +6,7 @@ import Comments from "../components/Comments";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { format } from "timeago.js";
+import DOMPurify from 'dompurify'
 
 const fetchPost = async (slug) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
@@ -24,6 +25,7 @@ const SinglePostPage = () => {
   if (error) return "Something went wrong !" + error.message;
   if (!data) return "Post not found!";
 
+  const sanitizedContent = DOMPurify.sanitize(data.content)
   return (
     <div className="flex flex-col gap-8">
       {/* detail */}
@@ -48,87 +50,12 @@ const SinglePostPage = () => {
         )}
       </div>
       {/* content */}
-      <div className="flex flex-col md:flex-row gap-12">
+      <div className="flex flex-col md:flex-row gap-12 justify-between">
         {/* text */}
-        <div className="lg:text-lg flex flex-col gap-6 text-justify">
-          <p className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            suscipit ipsa culpa obcaecati voluptatibus in assumenda vitae!
-            Laboriosam et beatae maiores magnam veritatis illo itaque,
-            inventore, in qui officia asperiores!Lorem Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Sit debitis mollitia doloremque,
-            est minus tempore commodi ex, pariatur atque placeat quasi dicta,
-            nostrum optio. Dignissimos quibusdam optio placeat delectus. Magnam!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            inventore consectetur suscipit modi illum nihil exercitationem atque
-            provident facilis iste voluptates dolor quam, a eos omnis,
-            laudantium ut. Harum, officiis.
-          </p>
-          <p className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            suscipit ipsa culpa obcaecati voluptatibus in assumenda vitae!
-            Laboriosam et beatae maiores magnam veritatis illo itaque,
-            inventore, in qui officia asperiores!Lorem Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Sit debitis mollitia doloremque,
-            est minus tempore commodi ex, pariatur atque placeat quasi dicta,
-            nostrum optio. Dignissimos quibusdam optio placeat delectus. Magnam!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            inventore consectetur suscipit modi illum nihil exercitationem atque
-            provident facilis iste voluptates dolor quam, a eos omnis,
-            laudantium ut. Harum, officiis.
-          </p>
-          <p className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            suscipit ipsa culpa obcaecati voluptatibus in assumenda vitae!
-            Laboriosam et beatae maiores magnam veritatis illo itaque,
-            inventore, in qui officia asperiores!Lorem Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Sit debitis mollitia doloremque,
-            est minus tempore commodi ex, pariatur atque placeat quasi dicta,
-            nostrum optio. Dignissimos quibusdam optio placeat delectus. Magnam!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            inventore consectetur suscipit modi illum nihil exercitationem atque
-            provident facilis iste voluptates dolor quam, a eos omnis,
-            laudantium ut. Harum, officiis.
-          </p>
-          <p className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            suscipit ipsa culpa obcaecati voluptatibus in assumenda vitae!
-            Laboriosam et beatae maiores magnam veritatis illo itaque,
-            inventore, in qui officia asperiores!Lorem Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Sit debitis mollitia doloremque,
-            est minus tempore commodi ex, pariatur atque placeat quasi dicta,
-            nostrum optio. Dignissimos quibusdam optio placeat delectus. Magnam!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            inventore consectetur suscipit modi illum nihil exercitationem atque
-            provident facilis iste voluptates dolor quam, a eos omnis,
-            laudantium ut. Harum, officiis.
-          </p>
-          <p className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            suscipit ipsa culpa obcaecati voluptatibus in assumenda vitae!
-            Laboriosam et beatae maiores magnam veritatis illo itaque,
-            inventore, in qui officia asperiores!Lorem Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Sit debitis mollitia doloremque,
-            est minus tempore commodi ex, pariatur atque placeat quasi dicta,
-            nostrum optio. Dignissimos quibusdam optio placeat delectus. Magnam!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            inventore consectetur suscipit modi illum nihil exercitationem atque
-            provident facilis iste voluptates dolor quam, a eos omnis,
-            laudantium ut. Harum, officiis.
-          </p>
-          <p className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            suscipit ipsa culpa obcaecati voluptatibus in assumenda vitae!
-            Laboriosam et beatae maiores magnam veritatis illo itaque,
-            inventore, in qui officia asperiores!Lorem Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Sit debitis mollitia doloremque,
-            est minus tempore commodi ex, pariatur atque placeat quasi dicta,
-            nostrum optio. Dignissimos quibusdam optio placeat delectus. Magnam!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            inventore consectetur suscipit modi illum nihil exercitationem atque
-            provident facilis iste voluptates dolor quam, a eos omnis,
-            laudantium ut. Harum, officiis.
-          </p>
+        <div className="lg:text-lg flex flex-col gap-6 text-justify"
+        dangerouslySetInnerHTML={{__html:sanitizedContent}}
+        >
+         
         </div>
         {/* menu */}
         <div className="px-4 h-max sticky top-8">

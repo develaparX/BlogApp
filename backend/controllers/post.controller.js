@@ -79,6 +79,7 @@ export const getPost = async (req, res) => {
     "user",
     "username img"
   );
+  console.log(post)
   res.status(200).json(post);
 };
 
